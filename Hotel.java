@@ -25,7 +25,7 @@ public class Hotel {
         System.out.println("Nome: "+this.nome);
         this.endereco.print();
         
-        System.out.println("Possui "+this.quartos.size()+" no hotel");
+        System.out.println("Possui "+this.quartos.size()+" quartos no hotel");
         
         System.out.println();
 
