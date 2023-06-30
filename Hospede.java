@@ -1,36 +1,53 @@
 import java.util.ArrayList;
 
-public class Hospede {
-    public String nome;
-    public String sobrenome;
-    public String telefone;
-    public String senha;
-    public ArrayList<Reserva> reservas; 
+public class Hospede extends Pessoa {
+    protected ArrayList<Reserva> reservas;
+    private String senha;
 
-    public Hospede(String nome,String sobrenome,String telefone,String senha) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.telefone = telefone;
+    protected Hospede(String nome, String sobrenome, String telefone, String senha) {
+        super(nome, sobrenome, telefone);
         this.senha = senha;
-        this.reservas = new ArrayList<>(); 
+        this.reservas = new ArrayList<>();
+
+        printInfs();
 
     }
 
-    public void print() {
-        System.out.println("Nome: "+this.nome+" "+this.sobrenome);
-        System.out.println("Numero de telefone de "+this.nome+": "+this.telefone);
-        System.out.println("Senha de "+this.nome+": "+this.senha);
-        
-        if(reservas.size() != 0) {
-            for(int i = 0;i < this.reservas.size(); i++) {
-                System.out.println();
-                
+    protected String getNome() {
+        return this.nome + " " + this.sobrenome;
+    }
+
+    protected String getTelefone() {
+        return this.telefone;
+    }
+
+    protected String getSenha() {
+        return this.senha;
+    }
+
+    protected String getReservas() {
+        if (!reservas.isEmpty()) {
+            String res = "";
+            for (Reserva e : reservas) {
+                res += "Quarto " + e.quarto + "\n";
             }
+            return res;
         }
-        System.out.println();
-        
+        return "Nenhuma reserva feita";
     }
 
+    protected void printInfs() {
+        System.out.println("Nome: " + getNome());
+        System.out.println("Senha: " + getSenha());
+        System.out.println("Telefone:" + getTelefone());
+        System.out.println("Quartos reservados:\n" + getReservas());
 
+    }
+
+    public static void main(String[] args) {
+        Hospede h = new Hospede("Joao", "Soares", "3487598", "lgkvnbvl");
+        h.reservas.add(new Reserva(null, h, null, null));
+        h.reservas.get(0).printInfs();
+    }
 
 }
