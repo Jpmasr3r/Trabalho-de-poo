@@ -29,6 +29,7 @@ public class Reserva {
     }
 
     protected void printInfs() {
+        System.out.println("\n*Informações da reserva*");
         System.out.println("Hopede: " + getHospede());
         System.out.println("Quarto: " + getQuarto());
         System.out.println("Data de inicio:" + getDataInicio());
