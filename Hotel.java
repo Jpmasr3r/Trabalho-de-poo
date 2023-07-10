@@ -28,14 +28,14 @@ public class Hotel {
         }
     }
 
-    protected void printHospedes() {
-        for (Hospede e : hospedes) {
-            e.printInfs();
-        }
-        if (hospedes.isEmpty()) {
-            System.out.println("\nNão há hospdes no hotel");
-        }
-    }
+    // protected void printHospedes() {
+    //     for (Hospede e : hospedes) {
+    //         e.printInfs();
+    //     }
+    //     if (hospedes.isEmpty()) {
+    //         System.out.println("\nNão há hospdes no hotel");
+    //     }
+    // }
 
     protected String getNome() {
         return this.nome;

@@ -30,13 +30,12 @@ public class Menu {
 
         System.out.println("\nDigite o endereço do hotel:");
         String enderecoH = lerString();
-        
+
         System.out.println("\nDigite a nota do hotel:");
         int notaH = lerInt();
 
         System.out.println("\nDigite o numero de quartos do hotel:");
         int nQuartosH = lerInt();
-
 
         lerString();
         hoteis.add(new Hotel(nomeH, notaH, nQuartosH, enderecoH));
@@ -82,12 +81,17 @@ public class Menu {
                 break;
 
             } else {
-                if (selected == 0) {
-                    addHotel();
-                } else {
-                    selectedHotel = hoteis.get(selected - 1);
-                    System.out.println("[" + selectedHotel.nome + "] - selecionado");
-                    lerString();
+                switch (selected) {
+                    case 0:
+                        addHotel();
+                        break;
+
+                    default:
+                        selectedHotel = hoteis.get(selected - 1);
+                        System.out.println("[" + selectedHotel.nome + "] - selecionado");
+                        lerString();
+                        break;
+
                 }
 
             }
@@ -104,6 +108,9 @@ public class Menu {
             System.out.println("[" + selectedHotel.nome + "] - Hotel selecionado");
             System.out.println("[-1] - Retornar");
             System.out.println("[0] - Mostrar informações");
+            System.out.println("[1] - Mostrar informações dos quartos");
+            System.out.println("[2] - Adicionar Hospede");
+            System.out.println("[3] - Adicionar Funcionario");
 
             int selected = lerInt();
 
@@ -112,10 +119,19 @@ public class Menu {
                 selectedHotel = null;
                 break;
             } else {
-                if (selected == 0) {
-                    selectedHotel.printInfs();
-                    lerString();
+                switch (selected) {
+                    case 0:
+                        selectedHotel.printInfs();
+                        lerString();
+                        break;
+
+                    case 1: 
+                        selectedHotel.printQuartos();
+                        lerString();
+                        break;
+
                 }
+
             }
 
             lerString();
