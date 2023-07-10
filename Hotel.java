@@ -50,11 +50,12 @@ public class Hotel {
     }
 
     protected void printInfs() {
-        System.out.println("\n*Informações do hotel*");
+        System.out.println("*Informações do hotel*");
         System.out.println("Nome: " + getNome());
         System.out.println("Endereço: " + getEndereco());
         System.out.println("Nota: " + getNota());
     }
+    
 
     protected void addHospde() {
         System.out.println("\nDigite o seu nome");

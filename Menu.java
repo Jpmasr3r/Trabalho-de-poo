@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Menu {
     protected static Scanner scanner = new Scanner(System.in);
     protected static ArrayList<Hotel> hoteis = new ArrayList<>();
+    protected static Hotel selectedHotel = null;
 
     protected static String lerString() {
         return scanner.nextLine();
@@ -17,18 +18,25 @@ public class Menu {
         return scanner.nextDouble();
     }
 
+    protected static void consoleClear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     protected static void addHotel() {
+        lerString();
         System.out.println("\nDigite o nome do hotel:");
         String nomeH = lerString();
 
+        System.out.println("\nDigite o endereço do hotel:");
+        String enderecoH = lerString();
+        
         System.out.println("\nDigite a nota do hotel:");
         int notaH = lerInt();
 
         System.out.println("\nDigite o numero de quartos do hotel:");
         int nQuartosH = lerInt();
 
-        System.out.println("\nDigite o endereço do hotel:");
-        String enderecoH = lerString();
 
         lerString();
         hoteis.add(new Hotel(nomeH, notaH, nQuartosH, enderecoH));
@@ -44,34 +52,81 @@ public class Menu {
     }
 
     protected static void sistema() {
-        if (hoteis.isEmpty()) {
-            System.out.println("[0] - Criar hotel");
+        boolean sys = true;
+        while (sys) {
+            consoleClear();
 
-            switch (lerInt()) {
-                case 0:
+            if (selectedHotel != null) {
+                sistemaHoteis();
+
+            }
+
+            System.out.println("[-1] - Sair do sistema");
+            System.out.println("[0] - Adicionar Hotel");
+
+            if (!hoteis.isEmpty()) {
+                int i = 0;
+                for (Hotel hoteis : hoteis) {
+                    i++;
+                    System.out.println("[" + i + "] - " + hoteis.nome);
+
+                }
+                ;
+
+            }
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                System.out.println("Obrigado por usar o sistema de hoteis ;)");
+                break;
+
+            } else {
+                if (selected == 0) {
                     addHotel();
-                    break;
+                } else {
+                    selectedHotel = hoteis.get(selected - 1);
+                    System.out.println("[" + selectedHotel.nome + "] - selecionado");
+                    lerString();
+                }
+
             }
 
-        } else {
-            ArrayList<Hotel> hs = new ArrayList<>();
-            int i = 0;
-            for (Hotel e : hoteis) {
-                System.out.println("[" + i + "] - " + e.getNome());
-                hs.add(e);
-                i++;
-            }
-            System.out.println("[" + (i + 1) + "] - Criar hotel");
-
-            int j = lerInt();
-
-            for (Hotel hs2 : hs) {
-                
-            }
+            lerString();
         }
     }
 
+    protected static void sistemaHoteis() {
+        boolean sys = true;
+        while (sys) {
+            consoleClear();
+
+            System.out.println("[" + selectedHotel.nome + "] - Hotel selecionado");
+            System.out.println("[-1] - Retornar");
+            System.out.println("[0] - Mostrar informações");
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                consoleClear();
+                selectedHotel = null;
+                break;
+            } else {
+                if (selected == 0) {
+                    selectedHotel.printInfs();
+                    lerString();
+                }
+            }
+
+            lerString();
+
+        }
+
+    }
+
     public static void main(String[] args) {
+        hoteis.add(new Hotel("Hotel teste 1", 10, 100, "Rua do teste 1"));
+        hoteis.add(new Hotel("Hotel da Floresta", 5, 15, "Floresta no meio do mato"));
         sistema();
     }
 
