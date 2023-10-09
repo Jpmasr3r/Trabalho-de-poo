@@ -5,11 +5,27 @@ public class Reserva {
     protected String dataFinal;
 
     protected Reserva(Quarto quarto, Hospede hospede, String dataInicio, String dataFinal) {
-        this.quarto = quarto;
-        this.hospede = hospede;
-        this.dataInicio = dataInicio;
-        this.dataFinal = dataFinal;
+        setDataFinal(dataFinal);
+        setDataInicio(dataInicio);
+        setHospede(hospede);
+        setQuarto(quarto);
 
+    }
+
+    public void setDataFinal(String dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
     }
 
     protected String getDataFinal() {

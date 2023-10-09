@@ -3,9 +3,17 @@ public class Quarto {
     protected boolean ocupado;
 
     protected Quarto(int numero) {
-        this.numero = numero+1;
+        setNumero(numero);
         this.ocupado = false;
 
+    }
+
+    private void setNumero(int numero) {
+        this.numero = numero+1;
+    }
+
+    protected void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
     protected int getNumero() {

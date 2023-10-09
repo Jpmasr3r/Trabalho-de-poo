@@ -5,42 +5,34 @@ public class Hospede extends Pessoa {
     private String senha;
 
     protected Hospede(String nome, String sobrenome, String telefone, String senha,int idade) {
-        super(nome, sobrenome, telefone,idade);
-        this.senha = senha;
+        super(nome,telefone,idade);
+        setSenha(senha);
         this.reservas = new ArrayList<>();
 
         printInfs();
 
     }
 
-    protected String getNome() {
-        return this.nome + " " + this.sobrenome;
-    }
-
-    protected String getTelefone() {
-        return this.telefone;
-    }
-
-    protected int getIdade() {
-        return this.idade;
-    }
-
     private String getSenha() {
         return this.senha;
+    }
+
+    private void setSenha(String senha) {
+        this.senha = senha;
     }
 
     protected String getReservas() {
         if (!reservas.isEmpty()) {
             String res = "";
             for (Reserva e : reservas) {
-                res += "Quarto " + e.quarto + "\n";
+                res += "Quarto " + e.quarto.getNumero() + "\n";
             }
             return res;
         }
         return "Nenhuma reserva feita";
     }
 
-    protected void addReserva(Hotel hotel) {
+    protected void setReserva(Hotel hotel) {
         System.out.println("Fazendo uma reserva");
         
         Quarto quarto = null;

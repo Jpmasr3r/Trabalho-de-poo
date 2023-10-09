@@ -9,44 +9,51 @@ public class Hotel {
     protected ArrayList<Funcionario> funcionarios;
 
     protected Hotel(String nome, int nota, int nQuartos, String endereco) {
-        this.nome = nome;
-        this.endereco = endereco;
-        this.nota = nota;
+        setNome(nome);
+        setEndereco(endereco);
+        setNota(nota);
         this.quartos = new ArrayList<>();
         this.hospedes = new ArrayList<>();
         this.funcionarios = new ArrayList<>();
 
+        setNQuartos(nQuartos);
+
+    }
+
+    private void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    private void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    private void setNota(int nota) {
+        this.nota = nota;
+    }
+
+    private void setNQuartos(int nQuartos) {
         for (int i = 0; i < nQuartos; i++) {
             this.quartos.add(new Quarto(i));
         }
-
-    }
-
-    protected void printQuartos() {
-        for (Quarto e : quartos) {
-            e.printInfs();
-        }
-    }
-
-    // protected void printHospedes() {
-    //     for (Hospede e : hospedes) {
-    //         e.printInfs();
-    //     }
-    //     if (hospedes.isEmpty()) {
-    //         System.out.println("\nNão há hospdes no hotel");
-    //     }
-    // }
-
-    protected String getNome() {
-        return this.nome;
     }
 
     protected String getEndereco() {
-        return this.endereco;
+        return endereco;
+    }
+
+    protected String getNome() {
+        return nome;
     }
 
     protected int getNota() {
-        return this.nota;
+        return nota;
+    }
+
+    protected void getQuartos() {
+        for (Quarto e : quartos) {
+            e.printInfs();
+        }
     }
 
     protected void printInfs() {
@@ -55,44 +62,46 @@ public class Hotel {
         System.out.println("Endereço: " + getEndereco());
         System.out.println("Nota: " + getNota());
     }
-    
 
-    protected void addHospde() {
-        System.out.println("\nDigite o seu nome");
+    protected void setHospde() {
+        System.out.println("\nDigite o nome");
         String nomeH = Menu.lerString();
 
-        System.out.println("\nDigite o seu sobrenome");
+        System.out.println("\nDigite o sobrenome");
         String sobrenomeH = Menu.lerString();
 
-        System.out.println("\nDigite sua idade");
+        System.out.println("\nDigite a idade");
         int idadeH = Menu.lerInt();
 
-        System.out.println("\nDigite seu telefone");
+        System.out.println("\nDigite o telefone");
         String telefoneH = Menu.lerString();
 
-        System.out.println("\nDigite sua senha");
+        System.out.println("\nDigite a senha");
         String senhaH = Menu.lerString();
 
         hospedes.add(new Hospede(nomeH, sobrenomeH, telefoneH, senhaH, idadeH));
     }
 
-    protected void addFuncionario() {
-        System.out.println("\nDigite o seu nome");
+    protected void setFuncionario() {
+        System.out.println("\nDigite o nome");
         String nomeF = Menu.lerString();
 
-        System.out.println("\nDigite o seu sobrenome");
+        System.out.println("\nDigite o sobrenome");
         String sobrenomeF = Menu.lerString();
 
-        System.out.println("\nDigite sua idade");
+        System.out.println("\nDigite a funcao");
+        String funcaoF = Menu.lerString();
+
+        System.out.println("\nDigite a idade");
         int idadeF = Menu.lerInt();
 
-        System.out.println("\nDigite seu telefone");
+        System.out.println("\nDigite o telefone");
         String telefoneF = Menu.lerString();
 
-        System.out.println("\nDigite seu salario");
+        System.out.println("\nDigite o salario");
         double salarioF = Menu.lerDouble();
 
-        funcionarios.add(new Funcionario(nomeF, sobrenomeF, telefoneF, idadeF, salarioF));
+        funcionarios.add(new Funcionario(nomeF, telefoneF, idadeF, salarioF, funcaoF));
     }
 
 }

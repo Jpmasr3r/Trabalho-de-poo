@@ -1,35 +1,37 @@
 public class Funcionario extends Pessoa {
     protected double salario;
+    protected String funcao;
 
-    protected Funcionario(String nome, String sobrenome, String telefone, int idade, double salario) {
-        super(nome, sobrenome, telefone, idade);
+    protected Funcionario(String nome,String telefone, int idade, double salario, String funcao) {
+        super(nome, telefone, idade);
+        setSalario(salario);
+        setFuncao(funcao);
+
+    }
+
+    private void setSalario(double salario) {
         this.salario = salario;
-
     }
 
-    protected String getNome() {
-        return this.nome + " " + this.sobrenome;
-    }
-
-    protected String getTelefone() {
-        return this.telefone;
-    }
-
-    protected int getIdade() {
-        return this.idade;
+    private void setFuncao(String funcao) {
+        this.funcao = funcao;
     }
 
     protected double getSalario() {
         return this.salario;
     }
 
-    protected void printInfs() {
-        System.out.println("\n*Informações do funcionario*");
-        System.out.println("Nome: " + getNome());
-        System.out.println("Idade: "+getIdade());
-        System.out.println("Salario: "+getSalario());
-        System.out.println("Telefone:" + getTelefone());
+    protected String getFuncao() {
+        return funcao;
     }
 
+    protected void printInfs() {
+        System.out.println("*Informações do funcionario*");
+        System.out.println("Nome: " + getNome());
+        System.out.println("Idade: " + getIdade());
+        System.out.println("Função: " + getFuncao());
+        System.out.println("Salario: " + getSalario());
+        System.out.println("Telefone:" + getTelefone());
+    }
 
 }

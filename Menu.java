@@ -11,11 +11,16 @@ public class Menu {
     }
 
     protected static int lerInt() {
-        return scanner.nextInt();
+        int Sint = scanner.nextInt();
+        lerString();
+        return Sint;
+
     }
 
     protected static double lerDouble() {
-        return scanner.nextDouble();
+        double Sdouble = scanner.nextDouble();
+        lerString();
+        return Sdouble;
     }
 
     protected static void consoleClear() {
@@ -24,7 +29,6 @@ public class Menu {
     }
 
     protected static void addHotel() {
-        lerString();
         System.out.println("\nDigite o nome do hotel:");
         String nomeH = lerString();
 
@@ -37,7 +41,6 @@ public class Menu {
         System.out.println("\nDigite o numero de quartos do hotel:");
         int nQuartosH = lerInt();
 
-        lerString();
         hoteis.add(new Hotel(nomeH, notaH, nQuartosH, enderecoH));
         System.out.println("\nHotel adicionado com sucesso");
     }
@@ -51,8 +54,7 @@ public class Menu {
     }
 
     protected static void sistema() {
-        boolean sys = true;
-        while (sys) {
+        while (true) {
             consoleClear();
 
             if (selectedHotel != null) {
@@ -67,7 +69,7 @@ public class Menu {
                 int i = 0;
                 for (Hotel hoteis : hoteis) {
                     i++;
-                    System.out.println("[" + i + "] - " + hoteis.nome);
+                    System.out.println("[" + i + "] - " + hoteis.getNome());
 
                 }
                 ;
@@ -88,8 +90,7 @@ public class Menu {
 
                     default:
                         selectedHotel = hoteis.get(selected - 1);
-                        System.out.println("[" + selectedHotel.nome + "] - selecionado");
-                        lerString();
+                        System.out.println("[" + selectedHotel.getNome() + "] - selecionado");
                         break;
 
                 }
@@ -101,16 +102,17 @@ public class Menu {
     }
 
     protected static void sistemaHoteis() {
-        boolean sys = true;
-        while (sys) {
+        while (true) {
             consoleClear();
 
-            System.out.println("[" + selectedHotel.nome + "] - Hotel selecionado");
+            System.out.println("[" + selectedHotel.getNome() + "] - Hotel selecionado");
             System.out.println("[-1] - Retornar");
             System.out.println("[0] - Mostrar informações");
             System.out.println("[1] - Mostrar informações dos quartos");
             System.out.println("[2] - Adicionar Hospede");
             System.out.println("[3] - Adicionar Funcionario");
+            System.out.println("[4] - Mostrar hospedes");
+            System.out.println("[5] - Mostrar funcionarios");
 
             int selected = lerInt();
 
@@ -122,12 +124,26 @@ public class Menu {
                 switch (selected) {
                     case 0:
                         selectedHotel.printInfs();
-                        lerString();
                         break;
 
-                    case 1: 
-                        selectedHotel.printQuartos();
-                        lerString();
+                    case 1:
+                        selectedHotel.getQuartos();
+                        break;
+
+                    case 2:
+                        selectedHotel.setHospde();
+                        break;
+
+                    case 3:
+                        selectedHotel.setFuncionario();
+                        break;
+
+                    case 4:
+                        sistemaHospede();
+                        break;
+
+                    case 5:
+                        sistemaFuncionarios();
                         break;
 
                 }
@@ -140,9 +156,154 @@ public class Menu {
 
     }
 
+    protected static void sistemaHospede() {
+        while (true) {
+            consoleClear();
+
+            System.out.println("Todos os hospdes do hotel " + selectedHotel.getNome());
+            System.out.println("[-1] - Retornar");
+
+            if (selectedHotel.hospedes.isEmpty()) {
+                System.out.println("Não ha hospedes no hotel " + selectedHotel.getNome());
+            } else {
+                int i = 0;
+                for (Hospede hospede : selectedHotel.hospedes) {
+                    System.out.println("[" + i + "] - " + hospede.getNome());
+                    i++;
+                }
+
+            }
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                consoleClear();
+                break;
+            } else {
+                int i = 0;
+                for (Hospede hospede : selectedHotel.hospedes) {
+                    if (selected == i) {
+                        consoleClear();
+                        sistemaHospede2(hospede);
+                    }
+                }
+            }
+
+            lerString();
+
+        }
+    }
+
+    protected static void sistemaHospede2(Hospede hospede) {
+        while (true) {
+            consoleClear();
+
+            System.out.println("Hospede " + hospede.getNome());
+            System.out.println("[-1] - Retornar");
+            System.out.println("[0] - Mostrar informaçoes");
+            System.out.println("[1] - Fazer reserva");
+            System.out.println("[2] - Mostrar reservas");
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                consoleClear();
+                break;
+            } else {
+                switch (selected) {
+                    case 0:
+                        hospede.printInfs();
+                        break;
+
+                    case 1:
+                        hospede.setReserva(selectedHotel);
+                        break;
+
+                    case 2:
+                        sistemaReservas(hospede);
+                }
+            }
+
+            lerString();
+
+        }
+    }
+
+    protected static void sistemaFuncionarios() {
+        while (true) {
+            consoleClear();
+
+            System.out.println("Todos os funcionarios do hotel " + selectedHotel.getNome());
+            System.out.println("[-1] - Retornar");
+
+            if (selectedHotel.funcionarios.isEmpty()) {
+                System.out.println("Não ha funcionarios no hotel " + selectedHotel.getNome());
+            } else {
+                int i = 0;
+                for (Funcionario funcionario : selectedHotel.funcionarios) {
+                    System.out.println("[" + i + "] - "+funcionario.getFuncao()+" / " + funcionario.getNome());
+                    i++;
+                }
+
+            }
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                consoleClear();
+                break;
+            } else {
+                int i = 0;
+                for (Funcionario funcionario : selectedHotel.funcionarios) {
+                    if (selected == i) {
+                        funcionario.printInfs();
+                    }
+                }
+            }
+
+            lerString();
+
+        }
+    }
+
+    protected static void sistemaReservas(Hospede hospede) {
+        while (true) {
+            consoleClear();
+
+            System.out.println("Todos as reservas do hospede " + hospede.getNome());
+            System.out.println("[-1] - Retornar");
+
+            if (hospede.reservas.isEmpty()) {
+                System.out.println("Não ha reservas para o hospede " + selectedHotel.getNome());
+            } else {
+                int i = 0;
+                for (Reserva reserva : hospede.reservas) {
+                    System.out.println("[" + i + "] - " + reserva.getDataInicio() + " ao " + reserva.getDataFinal());
+                    i++;
+                }
+
+            }
+
+            int selected = lerInt();
+
+            if (selected == -1) {
+                consoleClear();
+                break;
+            } else {
+                int i = 0;
+                for (Reserva reserva : hospede.reservas) {
+                    if (selected == i) {
+                        reserva.printInfs();
+                    }
+                }
+            }
+
+            lerString();
+
+        }
+    }
+
     public static void main(String[] args) {
-        hoteis.add(new Hotel("Hotel teste 1", 10, 100, "Rua do teste 1"));
-        hoteis.add(new Hotel("Hotel da Floresta", 5, 15, "Floresta no meio do mato"));
         sistema();
     }
 
