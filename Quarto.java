@@ -1,4 +1,6 @@
-public class Quarto {
+import java.io.Serializable;
+
+public class Quarto implements Serializable{
     protected int numero;
     protected boolean ocupado;
 
@@ -9,7 +11,7 @@ public class Quarto {
     }
 
     private void setNumero(int numero) {
-        this.numero = numero+1;
+        this.numero = numero + 1;
     }
 
     protected void setOcupado(boolean ocupado) {
@@ -21,17 +23,19 @@ public class Quarto {
     }
 
     protected String getOcupado() {
-        if(this.ocupado) {
+        if (this.ocupado) {
             return "\nO quarto esta ocupado";
-        }else {
+        } else {
             return "\nO não quarto esta ocupado";
         }
     }
 
     protected void printInfs() {
-        System.out.println("\n*Informações do quarto*");
-        System.out.println("O numero do quarto é: "+getNumero());
-        System.out.println(getOcupado());
+        String string = "\n*Informações do quarto*" +
+                "\nO numero do quarto é: " + getNumero() +
+                "\n" + getOcupado();
+
+        System.out.println(string);
     }
 
 }

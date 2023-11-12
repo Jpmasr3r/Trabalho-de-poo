@@ -1,30 +1,38 @@
-public class Reserva {
+import java.io.Serializable;
+
+public class Reserva implements Serializable{
     protected Quarto quarto;
-    protected Hospede hospede;
+    protected Usuario hospede;
     protected String dataInicio;
     protected String dataFinal;
+    protected Hotel hotel;
 
-    protected Reserva(Quarto quarto, Hospede hospede, String dataInicio, String dataFinal) {
+    protected Reserva(Quarto quarto, Usuario usuario, String dataInicio, String dataFinal,Hotel hotel) {
         setDataFinal(dataFinal);
         setDataInicio(dataInicio);
-        setHospede(hospede);
+        setHospede(usuario);
         setQuarto(quarto);
+        setHotel(hotel);
 
     }
 
-    public void setDataFinal(String dataFinal) {
+    private void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    private void setDataFinal(String dataFinal) {
         this.dataFinal = dataFinal;
     }
 
-    public void setDataInicio(String dataInicio) {
+    private void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public void setHospede(Hospede hospede) {
+    private void setHospede(Usuario hospede) {
         this.hospede = hospede;
     }
 
-    public void setQuarto(Quarto quarto) {
+    private void setQuarto(Quarto quarto) {
         this.quarto = quarto;
     }
 
@@ -37,7 +45,7 @@ public class Reserva {
     }
 
     protected String getHospede() {
-        return this.hospede.nome;
+        return this.hospede.getNome();
     }
 
     protected int getQuarto() {
@@ -50,6 +58,9 @@ public class Reserva {
         System.out.println("Quarto: " + getQuarto());
         System.out.println("Data de inicio:" + getDataInicio());
         System.out.println("Data de termino:\n" + getDataFinal());
+    }
 
+    public Hotel getHotel() {
+        return hotel;
     }
 }
